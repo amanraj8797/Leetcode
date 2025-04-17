@@ -11,8 +11,6 @@ class Solution {
         // Manual bubble sort based on (a + b).compareTo(b + a)
         /*
         also do as:
-        Arrays.sort(mid, (a, b) -> (b + a).compareTo(a + b));
-        */
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 String ij = mid[i] + mid[j];
@@ -25,6 +23,9 @@ class Solution {
                 }
             }
         }
+        */
+
+        Arrays.sort(mid, (a, b) -> (b + a).compareTo(a + b));
 
         // If the highest number is "0", return "0"
         if (mid[0].equals("0")) {
