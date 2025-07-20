@@ -12,38 +12,26 @@ class Solution {
     public ListNode oddEvenList(ListNode head) {
 
         if(head == null || head.next == null) return head;
-        
-        ListNode temp = head.next;
-        ListNode prev = head;
 
-        Queue <ListNode> mid = new LinkedList<>();
+        ListNode evenStart = head.next;
+        ListNode even = evenStart;
 
-        int i = 2;
+        ListNode odd = head;
 
-        while(temp != null) {
+        while(even!= null && even.next != null) {
 
-            if(i % 2 == 0) {
-                mid.add(temp);
-            }else {
-                prev.next = temp;
-                prev = temp;
-            }
-            i++;
-            temp = temp.next;
-        }
+            odd.next = even.next;
+            odd = odd.next;
 
-        while(!mid.isEmpty()) {
-
-            ListNode x = mid.poll();
-
-            prev.next = x;
-            prev = x;
+            even.next = odd.next;
+            even = even.next;
 
         }
 
-        prev.next = null;
+        odd.next = evenStart;
 
         return head;
+
         
     }
 }
