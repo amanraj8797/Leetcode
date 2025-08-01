@@ -23,21 +23,21 @@ class Solution {
         */
 
         // Approach 2
-    
+
             for(int bitIdx = 0; bitIdx <= 31; bitIdx++) {
             int count = 0;
-    
+
             for(int i = 0; i < nums.length; i++) {
-                if((nums[i] & (1 << bitIdx)) != 0) {
+                if((nums[i] & (1 << bitIdx)) != 0) {             // can be anything but not zero. Then there is one at ith bit
                     count++;
                 }
             }
-    
+
             if(count % 3 == 1) {
-                ans |= (1 << bitIdx);
+                ans = ans + (1 << bitIdx);
             }
         }
-    
+
         return ans;
 
     }
