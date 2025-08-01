@@ -24,6 +24,7 @@ class Node {
 class Solution {
 
     void doing(Node root) {
+
         Queue <Node> Q = new LinkedList<>();
 
         Q.add(root);
@@ -37,6 +38,7 @@ class Solution {
             if(prev.right != null) Q.add(prev.right);
 
             for(int i = 1; i < size; i++) {
+
                 Node temp = Q.poll();
 
                 prev.next = temp;
@@ -46,10 +48,7 @@ class Solution {
 
                 prev = temp;
             }
-
-            prev.next = null;
         }
-
     }
     public Node connect(Node root) {
 
@@ -58,5 +57,6 @@ class Solution {
         doing(root);
 
         return root;
+        
     }
 }
