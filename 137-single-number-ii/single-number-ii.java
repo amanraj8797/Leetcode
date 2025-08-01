@@ -1,13 +1,14 @@
 class Solution {
     public int singleNumber(int[] nums) {
 
-        Arrays.sort(nums);
-
         int n = nums.length;
 
         int ans = 0;
 
+        /*
         int i = 1;
+
+        Arrays.sort(nums);
 
         while(i < n) {
 
@@ -18,11 +19,26 @@ class Solution {
             i += 3;
         }
 
-        if(ans == 0) {
-            ans = nums[n - 1];
-        }
+        return nums[n - 1];
+        */
 
+        // Approach 2
+    
+            for(int bitIdx = 0; bitIdx <= 31; bitIdx++) {
+            int count = 0;
+    
+            for(int i = 0; i < nums.length; i++) {
+                if((nums[i] & (1 << bitIdx)) != 0) {
+                    count++;
+                }
+            }
+    
+            if(count % 3 == 1) {
+                ans |= (1 << bitIdx);
+            }
+        }
+    
         return ans;
-        
+
     }
 }
