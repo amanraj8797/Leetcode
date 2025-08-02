@@ -1,15 +1,32 @@
 class Solution {
 
-    // finding target in each ith row of matrix
-    boolean binarySearch(int [] rowi, int find) {
-
-        int low = 0, high = rowi.length - 1;
+    boolean binarySearchRow(int [] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
 
         while(low <= high) {
             int mid = low + (high - low)/2;
 
-            if(rowi[mid] == find) return true;
-            else if(rowi[mid] > find) high = mid - 1;
+            if(arr[mid] == target) return true;
+            else if(arr[mid] > target) high = mid - 1;
+            else low = mid + 1;
+
+        }
+
+        return false;
+    }
+
+    boolean binarySearchCol(int [][] mat, int i, int j, int target) {
+
+        int low = i;
+        int high = mat.length - 1;
+
+        while(low <= high) {
+
+            int mid = low + (high - low)/2;
+
+            if(mat[mid][j] == target) return true;
+            else if(mat[mid][j] > target) high = mid - 1;
             else low = mid + 1;
 
         }
@@ -19,13 +36,20 @@ class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
 
         int n = matrix.length;
-        int m = matrix[0].length;
 
-        // going to each row and do binary search and find target
-        for(int i = 0; i < n; i++) {
-            if(binarySearch(matrix[i], target) == true) return true;
-        } 
+        int col = matrix[0].length - 1;
+
+        for(int row = 0; row < n; row++) {
+
+            if(matrix[row][0] <= target && matrix[row][col] >= target) {
+                if(binarySearchRow(matrix[row], target) == true) return true;
+            }else if(matrix[row][col] >= target && matrix[n - 1][col] >= target) {
+                if(binarySearchCol(matrix, row, col, target) == true) return true;
+            }
+
+        }
 
         return false;
+        
     }
 }
