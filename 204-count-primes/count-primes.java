@@ -1,7 +1,43 @@
 class Solution {
+
+    void seive(int [] prime) {
+
+        Arrays.fill(prime, 1);
+
+        int n = prime.length;
+
+        for(int i = 2; i*i < n; i++) {
+
+            for(int j = i * i; j < n; j += i) {
+
+                if(prime[j] == 1) prime[j] = 0;
+
+            }
+        }
+    }
     public int countPrimes(int n) {
 
-        /* Sieve of sundaram or sieve of e
+        // sieve of eroctoses
+
+
+        if(n <= 2) return 0;
+
+        int count = 0;
+
+        int [] prime = new int[n];
+
+        seive(prime);
+
+        for(int i = 2; i < n; i++) {
+            if(prime[i] == 1) count++;
+        }
+        
+
+        return count;
+    }
+}
+
+/* Sieve of sundaram or sieve of e
 
         m = (n - 1)/2;
 
@@ -16,6 +52,7 @@ class Solution {
 
         */
 
+        /*
         if(n <= 2) return 0;
 
         int m = (n - 2)/2;      // exclude n
@@ -36,7 +73,7 @@ class Solution {
 
         while(true){
 
-         z = i + j + 2*i*j;
+            z = i + j + 2*i*j;
             if(i == j && z > m) break;
 
             if(z <= m) {
@@ -56,7 +93,4 @@ class Solution {
         }
 
         return count;
-
-        
-    }
-}
+        */
