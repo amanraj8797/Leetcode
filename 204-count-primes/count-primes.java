@@ -8,11 +8,12 @@ class Solution {
 
         for(int i = 2; i*i < n; i++) {
 
-            for(int j = i * i; j < n; j += i) {
-
-                if(prime[j] == 1) prime[j] = 0;
-
-            }
+            if(prime[i] == 1)
+                for(int j = i * i; j < n; j += i) {
+                
+                    if(prime[j] == 1) prime[j] = 0;
+    
+                }
         }
     }
     public int countPrimes(int n) {
