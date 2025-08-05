@@ -3,25 +3,27 @@ class Solution {
 
         int n = cardPoints.length;
 
-        int l = 0, r = n - 1, len = 0, score = 0, sum = 0;
+        int leftSum = 0, l = 0;
+
+        int rightSum = 0, r = n - 1;
+
+        int score = 0;
 
         while(l < k) {
-
-            sum += cardPoints[l++];
-
-            score = Math.max(score, sum);           
-
+            leftSum += cardPoints[l++];
         }
 
-        sum -= cardPoints[--l];
+        score = Math.max(score, leftSum + rightSum);
 
-        while(r >= (n - k)) {
-            sum += cardPoints[r--];
-            score = Math.max(score, sum);
-            if(l > 0) sum -= cardPoints[--l];
+        l--;
+
+        while(r >= n - k) {
+            rightSum += cardPoints[r--];
+            leftSum -= cardPoints[l--];
+
+            score = Math.max(score, leftSum + rightSum);
         }
-
-        return score;
         
+        return score;
     }
 }
