@@ -2,23 +2,31 @@ class Solution {
     public boolean canJump(int[] nums) {
 
         int n = nums.length;
-        
-        // person is at 0th index
-        int maxReach = 0;
-        
-        for(int i = 0; i < n; i++) {
 
-            // if step has been 0 then there is no forword going
-            if(maxReach < i) {
-                return false;
+        if(n == 1) return true;
+
+        int [] dp = new int[n];
+
+        if(nums[0] > 0) dp[0] = 1;
+
+        int i = 0;
+
+        while(dp[i] != 0) {
+
+            if(nums[i] + i >= (n - 1)) {
+                return true;
             }
 
-            // maximum jump taken
-            maxReach = Math.max(maxReach, i + nums[i]);
+            int j = i;
 
+            while(j <= (i + nums[i])) {
+                dp[j] = 1;
+                j++;
+            }
+            i++;
         }
 
-        return true;
+        return false;
         
     }
 }
